@@ -1,0 +1,305 @@
+% ===========================================================================
+% Template LaTeX Doc for Linear Algebra students.
+% To compile, click "PDF" on the left. (May have to click more than once)
+% Copy/Paste this template for each new HW you create.  
+% Go to settings on left to choose which .tex file to compile. 
+% To add a new .tex file, just click the little "+" at the very bottom left of the screen
+% You can only add new .tex files to your own projects. 
+% ===========================================================================
+
+\documentclass{article}
+
+% Packages
+\usepackage[utf8]{inputenc}     % Unicode input 
+\usepackage{amsmath, amssymb}   % American Math Society Foratting & Symbols
+\usepackage{graphicx}           % Allows you to insert graphics
+\usepackage{hyperref}           % Allows automatic references & hyperlinking
+\usepackage{xfrac}
+
+% Macros (these are shortcuts)
+% Read more about them here 
+% http://www.math.uh.edu/~torok/math_6298/latex/macros.html
+\newcommand{\R}{{\mathbb R}}    % Type $\R$ instead of $\mathbb{R}$ for the real numbers styliezed R
+\newcommand{\vt}{\mathbf}       % Type $\vt{...}$ instead of $\mathbf{...}$ to bold a symbol.
+
+\begin{document}
+
+% Title Stuff
+\title{NLP: Homework 1: Background Review + Building a classifier}
+\author{Raef Youssef}
+\date{2024/01/26}
+\maketitle                      % This command makes the title
+
+\section{Refreshing the Rows and Columns: Linear Algebra Review}
+% Section 1.1
+\subsection{Basic Operations}
+\begin{itemize}
+    \item Givens
+    \[
+        \alpha = 2, 
+        x = \begin{bmatrix} 
+            0  \\ 
+            1  \\ 
+            2  
+        \end{bmatrix},  
+        y = \begin{bmatrix} 
+            3  \\ 
+            4  \\ 
+            5  
+        \end{bmatrix}, 
+         z = \begin{bmatrix} 
+            1  \\ 
+            2  \\ 
+            -1  
+        \end{bmatrix}, 
+        A = \begin{bmatrix} 
+            3 & 2 & 2  \\ 
+            1 & 3 & 1  \\ 
+            1 & 1 & 3  
+        \end{bmatrix}
+    \]
+\end{itemize}
+\begin{enumerate}
+    \item 
+    \[x * y = 0 + 4 + 10 = 14\]
+    \item 
+    \[x * z = 0 + 2 -2 = 0\]
+    \item 
+    \[\alpha(x + y) = 
+        \begin{bmatrix}
+            6 \\ 10 \\ 14
+        \end{bmatrix}
+    \]
+    \item 
+    \[ || x || = \sqrt{5}\]
+    \item 
+    \[ x^T = \begin{bmatrix} 
+            0  & 
+            1  & 
+            2  
+        \end{bmatrix}
+    \]
+    \item 
+    \[
+        Ax = \begin{bmatrix}
+            0 & 0 & 0 \\
+            1 & 3 & 1 \\
+            2 & 2 & 6 \\
+        \end{bmatrix}
+    \]
+    \item 
+    \[
+        x^T A x = 
+        \begin{bmatrix}
+            0 &  0 &  0 \\
+            0 &  3 &  2 \\
+            0 &  2 & 12 \\
+        \end{bmatrix}
+    \]
+\end{enumerate}
+
+% Section 1.2
+\subsection{Matrix Algebra Rules}
+\begin{enumerate}
+    \item True
+    \item True
+    \item False
+    \item True
+    \item False
+    \item True
+    \item True
+    \item True
+    \item True
+\end{enumerate}
+
+% Section 1.3
+\subsection{Matrix operations}
+\begin{itemize}
+    \item Givens
+    \[
+        B = \begin{bmatrix}
+            1  & -1 & 0  \\ 
+            -1 & 2  & -1 \\ 
+            0  & -1 & 1   
+        \end{bmatrix}
+    \]
+    \item Is B invertible? If so find $B^{-1}$
+    \[
+        det(B) = -(-1) (-1) + (1) (2-1) = -1 + 1 = 0
+    \]
+    B is not invertible
+
+    \item Is B diagonalizable? If so, find its diagonalization
+        \begin{itemize}
+            \item Eigenvalues
+            \[
+                det(B - \lambda I) = 0 \longrightarrow
+                \lambda_1 = 0, \lambda_2 = 2, \lambda_3 = 2
+            \]
+            \item Eigenvectors
+            \[
+                (B - 0I)v = 0 \longrightarrow v_1 = \begin{bmatrix}
+                    1 \\ 1 \\ 1
+                \end{bmatrix}
+            \]
+            \[
+                (B - 2I)v = 0 \longrightarrow 
+                v_2 = 
+                \begin{bmatrix}
+                    -1 \\ 1 \\ 0
+                \end{bmatrix}, 
+                v_3
+                \begin{bmatrix}
+                    -1 \\ 0 \\ 1
+                \end{bmatrix}
+            \]
+            \item Calculate P
+            \[ P =
+                \begin{bmatrix}
+                    v_1 & v_2 & v_3
+                \end{bmatrix} =
+                \begin{bmatrix}
+                    1 & -1 & -1 \\
+                    1 & 1  & 0  \\
+                    1 & 0  & 1
+                \end{bmatrix}
+            \]
+            \item Calculate D
+            \[ D = 
+                \begin{bmatrix}
+                    \lambda_1 & 0 & 0 \\ 
+                    0 & \lambda_1 & 0 \\ 
+                    0 & 0 & \lambda_3
+                \end{bmatrix} =
+                \begin{bmatrix}
+                    0 & 0 & 0 \\ 
+                    0 & 2 & 0 \\ 
+                    0 & 0 & 2
+                \end{bmatrix}
+            \]
+            \item Diagonalization
+            \[
+                B = PDP^{-1}
+            \]
+        \end{itemize}
+\end{itemize}
+
+\section{Taking Chances: Probability Review}
+\subsection{Basic Probability}
+\begin{enumerate}
+    \item Tickets should be \$5
+    \[
+        P(win) = 12/36 = 1/3
+    \]
+    \[
+        P(loss) = 1 - P(win) = 2/3
+    \]
+    \[
+        EV = 15(1/3) + 0(2/3) = 5
+    \]
+    \item P(B) = .95 - .4 = .55
+    \item 
+    \[
+        P(A \cup B) = P(A) + P(B) - P(A)P(B)
+    \]
+    \[
+        .95 = .4 + .6 P(B) \longrightarrow P(B) = .9167
+    \]
+\end{enumerate}
+
+\subsection{Expectations and Variance}
+\begin{enumerate}
+    \item 
+    \[
+        P(H) = .5 (.3+.9) = .6
+    \]
+    \[
+        E[X] = (3)(.6) = 1.8
+    \]
+    \item 
+    \[
+        Var(X) = 3(.6)(.4) = .72
+    \]
+\end{enumerate}
+
+\subsection{A Variance Paradox?}
+\begin{enumerate}
+    \item There's no contradiction. When you sum i.i.d. random variables, you can sum their variance. However, when you add a random variable to itself, it's not i.i.d, instead you scale its values by $2x$. Therefore $Var(X + X) = Var(2X) = 4Var(X)$
+\end{enumerate}
+
+\section{Calculus Review }
+\subsection{One-variable derivatives}
+\begin{itemize}
+    \item 
+    \[
+        f^{'}(x) = 6x-2
+    \]
+    \item 
+    \[
+        f^{'}(x) = 1 - 2x
+    \]
+    \item 
+    \[
+        f^{'}(x) = 1 - \frac{\exp(-x)}{1+\exp(-x)} = 1 - (1-p(x)) = p(x)
+    \]
+\end{itemize}
+
+\subsection{Multi-variable derivative}
+\begin{itemize}
+    \item 
+    \[
+        \Delta f(x) = [x_1^2, exp(x_2)]
+    \]
+    \item 
+    \[
+        \Delta f(x) = exp(x_1, x_2 x_3), x_3 exp(x_1, x_2 x_3), x_2 exp(x_1, x_2 x_3)]
+    \]
+    \item 
+    \[
+        \Delta f(x) = a
+    \]
+    \item 
+    \[\Delta f(x) = 2Ax =
+        \begin{bmatrix}
+             4x_1 - 2x_2 \\
+            -2x_1 + 2x_2
+        \end{bmatrix}
+    \]
+    \item 
+    \[ 
+        \Delta f(x) = x 
+    \]
+\end{itemize}
+
+\section{Algorithms and Data Structures Review}
+\begin{enumerate}
+    \item 
+    \[
+        O(n log(n))
+    \]
+    \item 
+    \[
+        O(n)
+    \]
+    \item 
+    \[
+        O(log(n))
+    \]
+    \item 
+    \[
+        O(1)
+    \]
+    \item 
+    \[
+        O(nd)
+    \]
+    \item 
+    \[
+        O(d^2)
+    \]
+    \item 
+    \[
+        O(mnd)
+    \]
+\end{enumerate}
+\end{document}

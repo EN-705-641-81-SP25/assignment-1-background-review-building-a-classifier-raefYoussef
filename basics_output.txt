@@ -1,0 +1,81 @@
+$ python basics.py 
+shape of x1: torch.Size([3, 2]), after transpose: torch.Size([2, 3])
+dtype of x1: torch.float32, after casting to torch.long: torch.int64
+Size: 3 2
+
+torch.ones(3, 2)
+tensor([[1., 1.],
+        [1., 1.],
+        [1., 1.]])
+
+torch.zeros(3, 2)
+tensor([[0., 0.],
+        [0., 0.],
+        [0., 0.]])
+
+torch.rand(3, 2)
+tensor([[0.8823, 0.9150],
+        [0.3829, 0.9593],
+        [0.3904, 0.6009]])
+
+torch.randn(3, 3)
+tensor([[ 1.1561,  0.3965, -2.4661],
+        [ 0.3623,  0.3765, -0.1808],
+        [ 0.3930,  0.4327, -1.3627]])
+---------- Slicing of Tensors ----------
+tensor([2, 4, 6])
+tensor([1, 2])
+tensor(4)
+---------- Reshape Tensor ----------
+x:  tensor([[1., 2.],
+        [3., 4.]])
+
+x after .arange(6)
+tensor([0, 1, 2, 3, 4, 5])
+
+x after .view(2, 3)
+tensor([[0, 1, 2],
+        [3, 4, 5]])
+
+x after .permute(1, 0)
+tensor([[0, 3],
+        [1, 4],
+        [2, 5]])
+---------- Use of `-1` to Reshape the Tensors ----------
+tensor([[1, 2],
+        [3, 4],
+        [5, 6]])
+tensor([[1],
+        [2],
+        [3],
+        [4],
+        [5],
+        [6]])
+---------- Element-wise Sum ----------
+Addition
+ tensor([[2., 2.],
+        [2., 2.],
+        [2., 2.]])
+---------- Element-wise Mul ----------
+
+Element-wise multiplication
+ tensor([[1., 1.],
+        [1., 1.],
+        [1., 1.]])
+---------- Inplace Operations ----------
+How it started:
+ tensor([[1., 1.],
+        [1., 1.],
+        [1., 1.]])
+ tensor([[1., 1.],
+        [1., 1.],
+        [1., 1.]])
+How it's going:
+ tensor([[1., 1.],
+        [1., 1.],
+        [1., 1.]])
+ tensor([[2., 2.],
+        [2., 2.],
+        [2., 2.]])
+---------- PyTorch and Numpy Bridge ----------
+<class 'torch.Tensor'> <class 'numpy.ndarray'>
